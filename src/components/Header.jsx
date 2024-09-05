@@ -3,6 +3,7 @@ import { IoMoon, IoMoonOutline } from "react-icons/io5";
 
 import { Container } from "./Container";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const HeaderEl = styled.header`
   box-shadow: var(--shadow);
@@ -16,8 +17,8 @@ const Wrapper = styled.div`
   padding-block: 2rem;
 `;
 
-const Title = styled.a.attrs({
-  href: '/',
+const Title = styled(Link).attrs({
+  to: '/',
 })`
   text-decoration: none;
   font-size: var(--fs-sm);
@@ -34,8 +35,16 @@ const ModeSwitcher = styled.div`
 `;
 
 export const Header = () => {
-  const [theme, setTheme] = useState('light');
-  const toggleTheme = () => setTheme(theme === 'light' ? 'dark' : 'light')
+
+  const [theme, setTheme] = useState(() => {
+    return localStorage.getItem('theme') || 'light';
+  });
+
+  const toggleTheme = () => {
+    const newTheme = theme === 'light' ? 'dark' : 'light';
+    setTheme(newTheme);
+    localStorage.setItem('theme', newTheme);
+  }
 
   useEffect(() => {
     document.body.setAttribute('data-theme', theme)

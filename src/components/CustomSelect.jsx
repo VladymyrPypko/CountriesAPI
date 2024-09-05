@@ -13,6 +13,7 @@ export const CustomSelect = styled(Select).attrs({
       borderRadius: 'var(--radii)',
       boxShadow: 'var(--shadow)',
       color: 'var(--colors-text)',
+      cursor: 'pointer'
     }),
     option: (provided, state) => ({
       ...provided,
@@ -39,7 +40,7 @@ export const CustomSelect = styled(Select).attrs({
     color: var(--colors-text) !important;
   }
 
-  & > div[id] {
+  & > div:last-child {
     background-color: var(--colors-ui-base);
   }
 `;
